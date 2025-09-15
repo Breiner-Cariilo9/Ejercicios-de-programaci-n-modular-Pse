@@ -1,0 +1,76 @@
+// PROGRAMA 4: RESULTADOS DE EXÁMENES
+
+Funcion nota <- SolicitarNota(numeroExamen)
+    Definir nota Como Real
+    Repetir
+        Escribir "Ingrese la nota del examen #", numeroExamen, " (0-10): "
+        Leer nota
+        Si nota < 0 O nota > 10 Entonces
+            Escribir "La nota debe estar entre 0 y 10."
+        FinSi
+    Hasta Que nota >= 0 Y nota <= 10
+FinFuncion
+
+Funcion promedio <- CalcularPromedio(sumaNotas, cantidadExamenes)
+    promedio <- sumaNotas / cantidadExamenes
+FinFuncion
+
+Funcion estado <- DeterminarEstado(promedio)
+    Si promedio >= 6 Entonces
+        estado <- "APROBADO"
+    SiNo
+        estado <- "REPROBADO"
+    FinSi
+FinFuncion
+
+Funcion MostrarResultados(promedio, estado, cantidadExamenes)
+    Escribir ""
+    Escribir "=== RESULTADOS FINALES ==="
+    Escribir "Cantidad de exámenes: ", cantidadExamenes
+    Escribir "Promedio obtenido: ", promedio
+    Escribir "Estado del estudiante: ", estado
+    Si estado = "APROBADO" Entonces
+        Escribir "¡Felicitaciones! Has aprobado el curso."
+    SiNo
+        Escribir "Debes mejorar tu rendimiento académico."
+    FinSi
+    Escribir "=========================="
+FinFuncion
+
+Algoritmo ResultadosExamenes
+    Definir nota, sumaNotas, promedio Como Real
+    Definir cantidadExamenes Como Entero
+    Definir continuar, estado Como Caracter
+    
+    sumaNotas <- 0
+    cantidadExamenes <- 0
+    
+    Escribir "=== SISTEMA DE CALIFICACIONES ==="
+    Escribir "Nota mínima para aprobar: 6.0"
+    Escribir ""
+    
+    Repetir
+        cantidadExamenes <- cantidadExamenes + 1
+        
+        nota <- SolicitarNota(cantidadExamenes)
+        sumaNotas <- sumaNotas + nota
+        
+        Escribir "Nota registrada: ", nota
+        Escribir "Promedio actual: ", CalcularPromedio(sumaNotas, cantidadExamenes)
+        Escribir ""
+        
+        Repetir
+            Escribir "¿Desea ingresar otra nota? (s/n): "
+            Leer continuar
+            Si continuar <> "s" Y continuar <> "S" Y continuar <> "n" Y continuar <> "N" Entonces
+                Escribir "Por favor, ingrese 's' para sí o 'n' para no."
+            FinSi
+        Hasta Que continuar = "s" O continuar = "S" O continuar = "n" O continuar = "N"
+        
+    Hasta Que continuar = "n" O continuar = "N"
+    
+    promedio <- CalcularPromedio(sumaNotas, cantidadExamenes)
+    estado <- DeterminarEstado(promedio)
+    MostrarResultados(promedio, estado, cantidadExamenes)
+    
+FinAlgoritmo
