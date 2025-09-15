@@ -1,0 +1,260 @@
+// EJERCICIO 5: Sistema de menú de restaurante con descuentos por método de pago
+
+Funcion precio <- ObtenerPrecioPorCategoria(categoria, opcion)
+    Segun categoria Hacer
+        Caso 1: // Platos principales
+            Segun opcion Hacer
+                Caso 1:
+                    precio <- 15.99  // Pasta Italiana
+                Caso 2:
+                    precio <- 22.50  // Salmón Grillado
+                Caso 3:
+                    precio <- 18.75  // Pollo al Curry
+                Caso 4:
+                    precio <- 28.00  // Filete de Res
+                De Otro Modo:
+                    precio <- 0
+            FinSegun
+            
+        Caso 2: // Bebidas
+            Segun opcion Hacer
+                Caso 1:
+                    precio <- 3.50   // Coca Cola
+                Caso 2:
+                    precio <- 4.25   // Jugo Natural
+                Caso 3:
+                    precio <- 2.75   // Agua Mineral
+                Caso 4:
+                    precio <- 6.50   // Vino de la Casa
+                De Otro Modo:
+                    precio <- 0
+            FinSegun
+            
+        Caso 3: // Postres
+            Segun opcion Hacer
+                Caso 1:
+                    precio <- 7.50   // Tiramisu
+                Caso 2:
+                    precio <- 6.25   // Cheesecake
+                Caso 3:
+                    precio <- 5.75   // Helado Artesanal
+                Caso 4:
+                    precio <- 8.00   // Tarta de Chocolate
+                De Otro Modo:
+                    precio <- 0
+            FinSegun
+            
+        De Otro Modo:
+            precio <- 0
+    FinSegun
+FinFuncion
+
+Funcion nombre <- ObtenerNombrePorCategoria(categoria, opcion)
+    Segun categoria Hacer
+        Caso 1: // Platos principales
+            Segun opcion Hacer
+                Caso 1:
+                    nombre <- "Pasta Italiana con Salsa Boloñesa"
+                Caso 2:
+                    nombre <- "Salmón Grillado con Vegetales"
+                Caso 3:
+                    nombre <- "Pollo al Curry con Arroz Basmati"
+                Caso 4:
+                    nombre <- "Filete de Res con Papas Gratinadas"
+                De Otro Modo:
+                    nombre <- "Opción no válida"
+            FinSegun
+            
+        Caso 2: // Bebidas
+            Segun opcion Hacer
+                Caso 1:
+                    nombre <- "Coca Cola (500ml)"
+                Caso 2:
+                    nombre <- "Jugo Natural de Naranja"
+                Caso 3:
+                    nombre <- "Agua Mineral con Gas"
+                Caso 4:
+                    nombre <- "Vino de la Casa (Copa)"
+                De Otro Modo:
+                    nombre <- "Opción no válida"
+            FinSegun
+            
+        Caso 3: // Postres
+            Segun opcion Hacer
+                Caso 1:
+                    nombre <- "Tiramisu Tradicional Italiano"
+                Caso 2:
+                    nombre <- "Cheesecake de Frutos Rojos"
+                Caso 3:
+                    nombre <- "Helado Artesanal (3 bolas)"
+                Caso 4:
+                    nombre <- "Tarta de Chocolate Belga"
+                De Otro Modo:
+                    nombre <- "Opción no válida"
+            FinSegun
+            
+        De Otro Modo:
+            nombre <- "Categoría no válida"
+    FinSegun
+FinFuncion
+
+Funcion descuento <- CalcularDescuentoPorPago(metodoPago)
+    Segun metodoPago Hacer
+        Caso 1: // Efectivo
+            descuento <- 0.10  // 10% descuento
+        Caso 2: // Tarjeta de crédito
+            descuento <- 0.05  // 5% descuento
+        Caso 3: // Cheque
+            descuento <- 0.00  // Sin descuento
+        De Otro Modo:
+            descuento <- 0.00
+    FinSegun
+FinFuncion
+
+Algoritmo SistemaMenuRestaurante
+    Definir categoria, opcion, cantidad, metodoPago Como Entero
+    Definir nombrePlato Como Caracter
+    Definir precio, subtotal, totalPedido, descuentoTotal, totalFinal Como Real
+    Definir continuar Como Caracter
+    
+    totalPedido <- 0
+    
+    Escribir "=== RESTAURANTE 'EL BUEN SABOR' ==="
+    Escribir "🍽️ Sistema de pedidos en línea"
+    Escribir ""
+    
+    Repetir
+        Escribir "=== MENÚ PRINCIPAL ==="
+        Escribir "Seleccione una categoría:"
+        Escribir "1. 🍝 Platos Principales"
+        Escribir "2. 🥤 Bebidas"
+        Escribir "3. 🍰 Postres"
+        Escribir ""
+        Escribir "Ingrese su opción (1-3):"
+        Leer categoria
+        
+        Segun categoria Hacer
+            Caso 1:
+                Escribir ""
+                Escribir "🍝 === PLATOS PRINCIPALES ==="
+                Escribir "1. Pasta Italiana con Salsa Boloñesa - $15.99"
+                Escribir "2. Salmón Grillado con Vegetales - $22.50"
+                Escribir "3. Pollo al Curry con Arroz Basmati - $18.75"
+                Escribir "4. Filete de Res con Papas Gratinadas - $28.00"
+                
+            Caso 2:
+                Escribir ""
+                Escribir "🥤 === BEBIDAS ==="
+                Escribir "1. Coca Cola (500ml) - $3.50"
+                Escribir "2. Jugo Natural de Naranja - $4.25"
+                Escribir "3. Agua Mineral con Gas - $2.75"
+                Escribir "4. Vino de la Casa (Copa) - $6.50"
+                
+            Caso 3:
+                Escribir ""
+                Escribir "🍰 === POSTRES ==="
+                Escribir "1. Tiramisu Tradicional Italiano - $7.50"
+                Escribir "2. Cheesecake de Frutos Rojos - $6.25"
+                Escribir "3. Helado Artesanal (3 bolas) - $5.75"
+                Escribir "4. Tarta de Chocolate Belga - $8.00"
+                
+            De Otro Modo:
+                Escribir "❌ Categoría no válida"
+        FinSegun
+        
+        Si categoria >= 1 Y categoria <= 3 Entonces
+            Escribir ""
+            Escribir "Seleccione su opción (1-4):"
+            Leer opcion
+            
+            precio <- ObtenerPrecioPorCategoria(categoria, opcion)
+            nombrePlato <- ObtenerNombrePorCategoria(categoria, opcion)
+            
+            Si precio > 0 Entonces
+                Escribir ""
+                Escribir "✅ Seleccionado: ", nombrePlato
+                Escribir "💰 Precio unitario: $", precio
+                Escribir ""
+                Escribir "Ingrese la cantidad:"
+                Leer cantidad
+                
+                Si cantidad > 0 Entonces
+                    subtotal <- precio * cantidad
+                    totalPedido <- totalPedido + subtotal
+                    
+                    Escribir ""
+                    Escribir "🛒 === AGREGADO AL PEDIDO ==="
+                    Escribir "Producto: ", nombrePlato
+                    Escribir "Cantidad: ", cantidad
+                    Escribir "Subtotal: $", subtotal
+                    Escribir "Total acumulado: $", totalPedido
+                    
+                SiNo
+                    Escribir "❌ Cantidad no válida"
+                FinSi
+            SiNo
+                Escribir "❌ Opción no válida en esta categoría"
+            FinSi
+        FinSi
+        
+        Escribir ""
+        Escribir "¿Desea agregar más productos a su pedido? (S/N):"
+        Leer continuar
+        continuar <- Mayusculas(continuar)
+        Escribir ""
+        
+    Hasta Que continuar = "N"
+    
+    Si totalPedido > 0 Entonces
+        Escribir "=== RESUMEN DEL PEDIDO ==="
+        Escribir "💵 Subtotal: $", totalPedido
+        Escribir ""
+        Escribir "=== MÉTODO DE PAGO ==="
+        Escribir "Seleccione su método de pago:"
+        Escribir "1. 💸 Efectivo (10% descuento)"
+        Escribir "2. 💳 Tarjeta de Crédito (5% descuento)"
+        Escribir "3. 📝 Cheque (sin descuento)"
+        Escribir ""
+        Escribir "Ingrese su opción (1-3):"
+        Leer metodoPago
+        
+        descuentoTotal <- CalcularDescuentoPorPago(metodoPago)
+        totalFinal <- totalPedido * (1 - descuentoTotal)
+        
+        Escribir ""
+        Escribir "=== FACTURA FINAL ==="
+        
+        Segun metodoPago Hacer
+            Caso 1:
+                Escribir "💰 Método de pago: EFECTIVO"
+                Escribir "🎉 Descuento aplicado: 10%"
+            Caso 2:
+                Escribir "💳 Método de pago: TARJETA DE CRÉDITO"
+                Escribir "🎊 Descuento aplicado: 5%"
+            Caso 3:
+                Escribir "📝 Método de pago: CHEQUE"
+                Escribir "📋 Sin descuento"
+            De Otro Modo:
+                Escribir "❌ Método de pago no válido"
+                totalFinal <- totalPedido
+        FinSegun
+        
+        Escribir ""
+        Escribir "Subtotal: $", totalPedido
+        Si descuentoTotal > 0 Entonces
+            Escribir "Descuento: -$", (totalPedido * descuentoTotal)
+        FinSi
+        Escribir "=========================================="
+        Escribir "💵 TOTAL A PAGAR: $", totalFinal
+        Escribir ""
+        Escribir "⏰ Tiempo estimado de preparación: 20-30 minutos"
+        Escribir "🍽️ ¡Gracias por su pedido!"
+        
+    SiNo
+        Escribir "No se realizó ningún pedido."
+    FinSi
+    
+    Escribir ""
+    Escribir "¡Esperamos verle pronto en El Buen Sabor!"
+    
+FinAlgoritmo
