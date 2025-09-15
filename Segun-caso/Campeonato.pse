@@ -1,0 +1,258 @@
+// EJERCICIO 4: Sistema de clasificación para campeonato deportivo
+
+Funcion resultado <- DeterminarResultado(opcion)
+    Segun opcion Hacer
+        Caso 1:
+            resultado <- "GANADO"
+        Caso 2:
+            resultado <- "PERDIDO"
+        Caso 3:
+            resultado <- "EMPATADO"
+        De Otro Modo:
+            resultado <- "INVALIDO"
+    FinSegun
+FinFuncion
+
+Funcion puntos <- CalcularPuntosPorResultado(resultado)
+    Segun resultado Hacer
+        Caso "GANADO":
+            puntos <- 3
+        Caso "EMPATADO":
+            puntos <- 1
+        Caso "PERDIDO":
+            puntos <- 0
+        De Otro Modo:
+            puntos <- 0
+    FinSegun
+FinFuncion
+
+Funcion MostrarClasificacionActual(nombreEquipo, partidos, puntosTotales, ganados, empatados, perdidos)
+    Definir promedioPuntos Como Real
+    
+    Si partidos > 0 Entonces
+        promedioPuntos <- puntosTotales / partidos
+    SiNo
+        promedioPuntos <- 0
+    FinSi
+    
+    Escribir "=== CLASIFICACIÓN ACTUAL ==="
+    Escribir "🏆 Equipo: ", nombreEquipo
+    Escribir "⚽ Partidos jugados: ", partidos
+    Escribir "📊 Puntos totales: ", puntosTotales
+    Escribir "📈 Promedio por partido: ", promedioPuntos
+    Escribir ""
+    Escribir "📋 ESTADÍSTICAS DETALLADAS:"
+    Escribir "✅ Partidos ganados: ", ganados, " (", (ganados * 3), " pts)"
+    Escribir "🤝 Partidos empatados: ", empatados, " (", (empatados * 1), " pts)"
+    Escribir "❌ Partidos perdidos: ", perdidos, " (", (perdidos * 0), " pts)"
+    Escribir ""
+    
+    // Clasificar rendimiento usando Según-Caso
+    Segun Trunc(promedioPuntos * 10) Hacer  // Multiplicamos por 10 para manejar decimales
+        Caso 0 Hasta 4:  // 0.0 - 0.4
+            Escribir "📉 RENDIMIENTO: MUY BAJO"
+            Escribir "🔴 Zona de descenso directo"
+        Caso 5 Hasta 9:  // 0.5 - 0.9
+            Escribir "📉 RENDIMIENTO: BAJO"
+            Escribir "🟠 Cerca de la zona de descenso"
+        Caso 10 Hasta 14: // 1.0 - 1.4
+            Escribir "📊 RENDIMIENTO: REGULAR"
+            Escribir "🟡 Zona media-baja de la tabla"
+        Caso 15 Hasta 19: // 1.5 - 1.9
+            Escribir "📊 RENDIMIENTO: ACEPTABLE"
+            Escribir "🔵 Zona media de la tabla"
+        Caso 20 Hasta 24: // 2.0 - 2.4
+            Escribir "📈 RENDIMIENTO: BUENO"
+            Escribir "🟢 Zona media-alta"
+        Caso 25 Hasta 29: // 2.5 - 2.9
+            Escribir "📈 RENDIMIENTO: EXCELENTE"
+            Escribir "⭐ Zona de clasificación europea"
+        Caso 30:          // 3.0
+            Escribir "📈 RENDIMIENTO: PERFECTO"
+            Escribir "🥇 Zona de liderato absoluto"
+        De Otro Modo:
+            Escribir "📊 RENDIMIENTO: EN EVALUACIÓN"
+    FinSegun
+    
+    // Mostrar tendencia según últimos resultados
+    Si partidos >= 3 Entonces
+        Escribir ""
+        Escribir "📊 ANÁLISIS DE TENDENCIA:"
+        Segun Trunc(promedioPuntos * 10) Hacer
+            Caso 0 Hasta 9:
+                Escribir "⚠️ URGENTE: Necesita mejorar inmediatamente"
+                Escribir "📋 Recomendación: Reforzar defensa y estrategia"
+            Caso 10 Hasta 19:
+                Escribir "🔄 Rendimiento inconsistente"
+                Escribir "📋 Recomendación: Trabajar en la regularidad"
+            Caso 20 Hasta 29:
+                Escribir "📈 Buena progresión del equipo"
+                Escribir "📋 Recomendación: Mantener el nivel actual"
+            Caso 30:
+                Escribir "🏆 ¡Rendimiento excepcional!"
+                Escribir "📋 Recomendación: Mantener la concentración"
+        FinSegun
+    FinSi
+FinFuncion
+
+Algoritmo SistemaClasificacionDeportiva
+    Definir nombreEquipo Como Caracter
+    Definir opcionResultado, partidos, puntosTotales Como Entero
+    Definir ganados, empatados, perdidos Como Entero
+    Definir resultado Como Caracter
+    Definir continuar Como Caracter
+    
+    // Inicialización
+    partidos <- 0
+    puntosTotales <- 0
+    ganados <- 0
+    empatados <- 0
+    perdidos <- 0
+    
+    Escribir "=== SISTEMA DE CLASIFICACIÓN DEPORTIVA ==="
+    Escribir "⚽ Gestor de puntos para campeonato"
+    Escribir ""
+    Escribir "Ingrese el nombre del equipo:"
+    Leer nombreEquipo
+    Escribir ""
+    Escribir "🏆 Equipo registrado: ", nombreEquipo
+    Escribir ""
+    
+    Repetir
+        Escribir "=== REGISTRO DE PARTIDO #", (partidos + 1), " ==="
+        Escribir "Seleccione el resultado del partido:"
+        Escribir "1. 🥇 Ganado (3 puntos)"
+        Escribir "2. ❌ Perdido (0 puntos)"  
+        Escribir "3. 🤝 Empatado (1 punto)"
+        Escribir ""
+        Escribir "Ingrese su opción (1-3):"
+        Leer opcionResultado
+        
+        resultado <- DeterminarResultado(opcionResultado)
+        
+        Segun resultado Hacer
+            Caso "GANADO":
+                Escribir "✅ Resultado registrado: VICTORIA"
+                puntosTotales <- puntosTotales + CalcularPuntosPorResultado(resultado)
+                ganados <- ganados + 1
+                partidos <- partidos + 1
+                Escribir "🎉 ¡Felicitaciones! +3 puntos"
+                Escribir "💪 El equipo suma una victoria importante"
+                
+            Caso "EMPATADO":
+                Escribir "✅ Resultado registrado: EMPATE"
+                puntosTotales <- puntosTotales + CalcularPuntosPorResultado(resultado)
+                empatados <- empatados + 1
+                partidos <- partidos + 1
+                Escribir "🤝 Buen esfuerzo. +1 punto"
+                Escribir "⚖️ Un punto que puede ser valioso"
+                
+            Caso "PERDIDO":
+                Escribir "✅ Resultado registrado: DERROTA"
+                puntosTotales <- puntosTotales + CalcularPuntosPorResultado(resultado)
+                perdidos <- perdidos + 1
+                partidos <- partidos + 1
+                Escribir "😔 A seguir luchando. +0 puntos"
+                Escribir "🔄 La próxima será mejor"
+                
+            De Otro Modo:
+                Escribir "❌ Opción no válida. Seleccione 1, 2 o 3"
+        FinSegun
+        
+        Si resultado <> "INVALIDO" Entonces
+            Escribir ""
+            MostrarClasificacionActual(nombreEquipo, partidos, puntosTotales, ganados, empatados, perdidos)
+            
+            // Mostrar objetivos según puntos actuales
+            Si partidos >= 5 Entonces
+                Escribir ""
+                Escribir "=== OBJETIVOS DE TEMPORADA ==="
+                Segun Trunc((puntosTotales / partidos) * 10) Hacer
+                    Caso 0 Hasta 9:
+                        Escribir "🎯 Objetivo inmediato: Evitar el descenso"
+                        Escribir "📋 Meta: Alcanzar 1.0 puntos por partido"
+                    Caso 10 Hasta 14:
+                        Escribir "🎯 Objetivo: Permanencia segura"
+                        Escribir "📋 Meta: Alcanzar 1.5 puntos por partido"
+                    Caso 15 Hasta 19:
+                        Escribir "🎯 Objetivo: Clasificación media"
+                        Escribir "📋 Meta: Alcanzar 2.0 puntos por partido"
+                    Caso 20 Hasta 24:
+                        Escribir "🎯 Objetivo: Competencias internacionales"
+                        Escribir "📋 Meta: Mantener más de 2.0 puntos por partido"
+                    Caso 25 Hasta 30:
+                        Escribir "🎯 Objetivo: ¡Luchar por el título!"
+                        Escribir "📋 Meta: Mantener el excelente rendimiento"
+                FinSegun
+            FinSi
+        FinSi
+        
+        Escribir ""
+        Escribir "¿Desea registrar otro partido? (S/N):"
+        Leer continuar
+        continuar <- Mayusculas(continuar)
+        Escribir ""
+        
+    Hasta Que continuar = "N"
+    
+    // Resumen final con análisis completo
+    Escribir "=== RESUMEN FINAL DE LA TEMPORADA ==="
+    MostrarClasificacionActual(nombreEquipo, partidos, puntosTotales, ganados, empatados, perdidos)
+    
+    Si partidos > 0 Entonces
+        Escribir ""
+        Escribir "🏆 ANÁLISIS FINAL:"
+        
+        // Logros especiales usando Según-Caso
+        Segun ganados Hacer
+            Caso 0:
+                Si empatados > 0 Entonces
+                    Escribir "🛡️ Sin victorias, pero con puntos por empates"
+                SiNo
+                    Escribir "😔 Temporada muy difícil sin puntos"
+                FinSi
+            Caso 1 Hasta 2:
+                Escribir "💪 Primeras victorias conseguidas"
+            Caso 3 Hasta 5:
+                Escribir "⭐ Buen número de victorias"
+            De Otro Modo:
+                Si ganados = partidos Entonces
+                    Escribir "🥇 ¡TEMPORADA PERFECTA! - Invicto con todas victorias"
+                SiNo
+                    Escribir "🏆 ¡EXCELENTE TEMPORADA! - Gran cantidad de victorias"
+                FinSi
+        FinSegun
+        
+        // Análisis de consistencia
+        Si perdidos = 0 Entonces
+            Escribir "🛡️ ¡INVICTO! - Sin derrotas en toda la temporada"
+        FinSi
+        
+        Si ganados >= partidos * 0.7 Entonces
+            Escribir "🌟 MÁS DEL 70% DE VICTORIAS - Rendimiento excepcional"
+        FinSi
+        
+        // Clasificación final
+        Escribir ""
+        Escribir "📊 POSICIÓN ESTIMADA EN LA TABLA:"
+        Segun Trunc((puntosTotales / partidos) * 10) Hacer
+            Caso 0 Hasta 9:
+                Escribir "📍 Posiciones 18-20 (Zona de descenso)"
+            Caso 10 Hasta 14:
+                Escribir "📍 Posiciones 15-17 (Zona de permanencia)"
+            Caso 15 Hasta 19:
+                Escribir "📍 Posiciones 10-14 (Zona media)"
+            Caso 20 Hasta 24:
+                Escribir "📍 Posiciones 5-9 (Zona media-alta)"
+            Caso 25 Hasta 29:
+                Escribir "📍 Posiciones 2-4 (Zona europea)"
+            Caso 30:
+                Escribir "📍 Posición 1 (¡CAMPEÓN!)"
+        FinSegun
+    FinSi
+    
+    Escribir ""
+    Escribir "Gracias por usar el Sistema de Clasificación Deportiva"
+    Escribir "¡Nos vemos la próxima temporada!"
+    
+FinAlgoritmo
