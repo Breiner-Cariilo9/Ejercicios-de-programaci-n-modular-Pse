@@ -1,0 +1,185 @@
+// EJERCICIO 3: Simulador de impresora - El usuario imprime mientras haya papel suficiente
+
+Funcion hayPapelSuficiente <- VerificarPapel(paginasSolicitadas, papelDisponible)
+    Si paginasSolicitadas > 0 Y paginasSolicitadas <= papelDisponible Entonces
+        hayPapelSuficiente <- Verdadero
+    SiNo
+        hayPapelSuficiente <- Falso
+    FinSi
+FinFuncion
+
+Funcion papelRestante <- ActualizarPapel(papelActual, paginasImpresas)
+    papelRestante <- papelActual - paginasImpresas
+FinFuncion
+
+Funcion MostrarEstadoImpresora(papel, trabajoActual, paginasImpresas)
+    Definir porcentajePapel Como Real
+    porcentajePapel <- (papel / 500) * 100  // Asumiendo capacidad máxima de 500 hojas
+    
+    Escribir "=== ESTADO DE LA IMPRESORA ==="
+    Escribir "📄 Papel disponible: ", papel, " hojas"
+    Escribir "📊 Capacidad de papel: ", porcentajePapel, "%"
+    
+    Si trabajoActual <> "" Entonces
+        Escribir "🖨️ Trabajo actual: ", trabajoActual
+        Escribir "📃 Páginas procesadas: ", paginasImpresas
+    FinSi
+    
+    Escribir ""
+    
+    // Indicador visual del nivel de papel
+    Si porcentajePapel > 75 Entonces
+        Escribir "🟢 Papel suficiente"
+    SiNo
+        Si porcentajePapel > 50 Entonces
+            Escribir "🟡 Nivel de papel moderado"
+        SiNo
+            Si porcentajePapel > 25 Entonces
+                Escribir "🟠 Papel bajo - Considere recargar pronto"
+            SiNo
+                Si porcentajePapel > 0 Entonces
+                    Escribir "🔴 Papel crítico - Recargue inmediatamente"
+                SiNo
+                    Escribir "⚫ Sin papel - Imposible imprimir"
+                FinSi
+            FinSi
+        FinSi
+    FinSi
+    
+    Escribir "----------------------------------------"
+FinFuncion
+
+Algoritmo SimuladorImpresora
+    Definir papelEnImpresora, paginasAImprimir Como Entero
+    Definir nombreTrabajo Como Caracter
+    Definir puedeImprimir Como Logico
+    Definir continuarImprimiendo Como Caracter
+    Definir totalTrabajos, totalPaginasImpresas Como Entero
+    
+    // Inicialización - Impresora con papel completo
+    papelEnImpresora <- 500
+    totalTrabajos <- 0
+    totalPaginasImpresas <- 0
+    
+    Escribir "=== SIMULADOR DE IMPRESORA HP LaserJet ==="
+    Escribir "🖨️ Sistema de gestión de impresión"
+    Escribir "📄 Capacidad inicial: 500 hojas"
+    Escribir ""
+    
+    MostrarEstadoImpresora(papelEnImpresora, "", 0)
+    Escribir ""
+    
+    Mientras papelEnImpresora > 0 Hacer
+        totalTrabajos <- totalTrabajos + 1
+        
+        Escribir "=== TRABAJO DE IMPRESIÓN #", totalTrabajos, " ==="
+        Escribir "Ingrese el nombre del documento:"
+        Leer nombreTrabajo
+        
+        Escribir "Ingrese la cantidad de páginas que desea imprimir:"
+        Leer paginasAImprimir
+        
+        Si VerificarPapel(paginasAImprimir, papelEnImpresora) Entonces
+            Escribir ""
+            Escribir "✅ Papel suficiente - Iniciando impresión"
+            Escribir "🖨️ Imprimiendo: ", nombreTrabajo
+            Escribir "📃 Páginas: ", paginasAImprimir
+            Escribir ""
+            
+            // Simular proceso de impresión
+            Escribir "🔄 Procesando..."
+            Escribir "📄 Alimentando papel..."
+            Escribir "🖨️ Imprimiendo páginas..."
+            
+            // Actualizar estado
+            papelEnImpresora <- ActualizarPapel(papelEnImpresora, paginasAImprimir)
+            totalPaginasImpresas <- totalPaginasImpresas + paginasAImprimir
+            
+            Escribir "✅ ¡Impresión completada!"
+            Escribir ""
+            MostrarEstadoImpresora(papelEnImpresora, nombreTrabajo, paginasAImprimir)
+            
+            // Verificar si puede continuar imprimiendo
+            Si papelEnImpresora > 0 Entonces
+                Escribir ""
+                Escribir "¿Desea imprimir otro documento? (S/N):"
+                Leer continuarImprimiendo
+                continuarImprimiendo <- Mayusculas(continuarImprimiendo)
+                
+                Si continuarImprimiendo = "N" Entonces
+                    Escribir "🖨️ Sesión de impresión finalizada por el usuario"
+                    Escribir ""
+                    // Salir del bucle aunque haya papel
+                    papelEnImpresora <- 0  // Forzar salida del mientras
+                FinSi
+                
+            SiNo
+                Escribir ""
+                Escribir "🚫 Sin papel disponible - Imposible continuar"
+                Escribir "🔧 Recargue papel para continuar imprimiendo"
+            FinSi
+            
+        SiNo
+            Escribir ""
+            Si paginasAImprimir <= 0 Entonces
+                Escribir "❌ ERROR: Número de páginas inválido"
+                Escribir "💡 Debe ser un número mayor a 0"
+            SiNo
+                Escribir "❌ ERROR: Papel insuficiente"
+                Escribir "📄 Papel disponible: ", papelEnImpresora, " hojas"
+                Escribir "📃 Páginas solicitadas: ", paginasAImprimir, " hojas"
+                Escribir "🚫 Faltan: ", (paginasAImprimir - papelEnImpresora), " hojas"
+                
+                Si papelEnImpresora > 0 Entonces
+                    Escribir ""
+                    Escribir "💡 Opciones disponibles:"
+                    Escribir "1. Imprimir solo ", papelEnImpresora, " páginas disponibles"
+                    Escribir "2. Recargar papel y reintentar"
+                    Escribir "3. Cancelar trabajo"
+                FinSi
+            FinSi
+            
+            totalTrabajos <- totalTrabajos - 1  // No contar trabajo fallido
+            
+            Si papelEnImpresora > 0 Entonces
+                Escribir ""
+                Escribir "¿Desea intentar con otro trabajo? (S/N):"
+                Leer continuarImprimiendo
+                continuarImprimiendo <- Mayusculas(continuarImprimiendo)
+                
+                Si continuarImprimiendo = "N" Entonces
+                    papelEnImpresora <- 0  // Forzar salida
+                FinSi
+            FinSi
+        FinSi
+        
+        Escribir ""
+        
+    FinMientras
+    
+    // Resumen final de la sesión
+    Escribir "=== RESUMEN DE SESIÓN DE IMPRESIÓN ==="
+    Escribir "🖨️ Trabajos completados exitosamente: ", totalTrabajos
+    Escribir "📃 Total de páginas impresas: ", totalPaginasImpresas
+    Escribir "📄 Papel restante: ", papelEnImpresora, " hojas"
+    
+    Si totalTrabajos > 0 Entonces
+        Escribir "📊 Promedio páginas por trabajo: ", (totalPaginasImpresas / totalTrabajos)
+    FinSi
+    
+    Si papelEnImpresora = 0 Entonces
+        Escribir ""
+        Escribir "⚠️ ATENCIÓN: Impresora sin papel"
+        Escribir "🔧 Acciones requeridas:"
+        Escribir "   • Recargar papel en la bandeja"
+        Escribir "   • Verificar calidad del papel"
+        Escribir "   • Ajustar guías de papel"
+    SiNo
+        Escribir ""
+        Escribir "✅ Impresora lista para más trabajos"
+    FinSi
+    
+    Escribir ""
+    Escribir "Gracias por usar el Simulador de Impresora"
+    
+FinAlgoritmo
