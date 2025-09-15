@@ -1,0 +1,186 @@
+// EJERCICIO 3: Asistente virtual para recomendaciones de películas según edad
+
+Funcion categoria <- DeterminarCategoriaEdad(edad)
+    Segun edad Hacer
+        Caso 0 Hasta 6:
+            categoria <- 1  // Niños pequeños
+        Caso 7 Hasta 12:
+            categoria <- 2  // Niños
+        Caso 13 Hasta 17:
+            categoria <- 3  // Adolescentes
+        Caso 18 Hasta 30:
+            categoria <- 4  // Adultos jóvenes
+        De Otro Modo:
+            categoria <- 5  // Personas mayores
+    FinSegun
+FinFuncion
+
+Funcion MostrarRecomendacionesPorEdad(categoria, edad)
+    Escribir "=== RECOMENDACIONES CINEMATOGRÁFICAS ==="
+    Escribir "👤 Edad del usuario: ", edad, " años"
+    Escribir ""
+    
+    Segun categoria Hacer
+        Caso 1:
+            Escribir "🧸 CATEGORÍA: PRIMERA INFANCIA (0-6 años)"
+            Escribir "🎬 PELÍCULAS RECOMENDADAS:"
+            Escribir "• Moana - Aventura musical oceánica"
+            Escribir "• Coco - Celebración familiar mexicana"
+            Escribir "• Buscando a Nemo - Aventura submarina"
+            Escribir "• Frozen - Musical de princesas"
+            Escribir "• El Rey León - Clásico de Disney"
+            Escribir ""
+            Escribir "📋 CARACTERÍSTICAS APROPIADAS:"
+            Escribir "• Contenido educativo y valores familiares"
+            Escribir "• Animaciones coloridas y música pegajosa"
+            Escribir "• Duración corta (90-100 minutos)"
+            Escribir "• Sin escenas que causen miedo"
+            
+        Caso 2:
+            Escribir "👦👧 CATEGORÍA: NIÑOS (7-12 años)"
+            Escribir "🎬 PELÍCULAS RECOMENDADAS:"
+            Escribir "• Harry Potter y la Piedra Filosofal - Fantasía mágica"
+            Escribir "• Los Increíbles - Superhéroes familiares"
+            Escribir "• Matilda - Comedia familiar"
+            Escribir "• E.T. - Ciencia ficción familiar"
+            Escribir "• Shrek - Comedia de aventuras"
+            Escribir ""
+            Escribir "📋 CARACTERÍSTICAS APROPIADAS:"
+            Escribir "• Aventuras emocionantes sin violencia excesiva"
+            Escribir "• Personajes con los que pueden identificarse"
+            Escribir "• Lecciones de amistad y perseverancia"
+            Escribir "• Humor apropiado para la edad"
+            
+        Caso 3:
+            Escribir "🧑‍🎓 CATEGORÍA: ADOLESCENTES (13-17 años)"
+            Escribir "🎬 PELÍCULAS RECOMENDADAS:"
+            Escribir "• Spider-Man: Un Nuevo Universo - Superhéroes animados"
+            Escribir "• The Maze Runner - Ciencia ficción y aventura"
+            Escribir "• Coco - Drama musical familiar"
+            Escribir "• Ready Player One - Aventura tecnológica"
+            Escribir "• La La Land - Musical romántico"
+            Escribir ""
+            Escribir "📋 CARACTERÍSTICAS APROPIADAS:"
+            Escribir "• Temáticas de autodescubrimiento"
+            Escribir "• Protagonistas adolescentes"
+            Escribir "• Mezcla de géneros (acción, comedia, drama)"
+            Escribir "• Contenido apropiado para menores"
+            
+        Caso 4:
+            Escribir "🧑‍💼 CATEGORÍA: ADULTOS JÓVENES (18-30 años)"
+            Escribir "🎬 PELÍCULAS RECOMENDADAS:"
+            Escribir ""
+            Escribir "🎭 ACCIÓN:"
+            Escribir "• Mad Max: Fury Road - Acción post-apocalíptica"
+            Escribir "• John Wick - Thriller de acción"
+            Escribir ""
+            Escribir "🎭 DRAMA:"
+            Escribir "• Parasite - Drama social coreano"
+            Escribir "• La La Land - Drama musical romántico"
+            Escribir ""
+            Escribir "😂 COMEDIA:"
+            Escribir "• Superbad - Comedia juvenil"
+            Escribir "• Knives Out - Comedia de misterio"
+            Escribir ""
+            Escribir "🚀 CIENCIA FICCIÓN:"
+            Escribir "• Inception - Thriller psicológico"
+            Escribir "• Blade Runner 2049 - Ciencia ficción noir"
+            
+        Caso 5:
+            Escribir "👴👵 CATEGORÍA: PERSONAS MAYORES (31+ años)"
+            Escribir "🎬 PELÍCULAS RECOMENDADAS:"
+            Escribir ""
+            Escribir "🎭 DRAMAS CLÁSICOS:"
+            Escribir "• Casablanca - Romance clásico"
+            Escribir "• El Padrino - Drama criminal épico"
+            Escribir "• Forrest Gump - Drama histórico"
+            Escribir ""
+            Escribir "🎭 DRAMAS CONTEMPORÁNEOS:"
+            Escribir "• Green Book - Drama biográfico"
+            Escribir "• The Crown (Serie) - Drama histórico"
+            Escribir ""
+            Escribir "📋 CARACTERÍSTICAS RECOMENDADAS:"
+            Escribir "• Narrativas profundas y reflexivas"
+            Escribir "• Actuaciones destacadas"
+            Escribir "• Temáticas maduras y complejas"
+            Escribir "• Clásicos atemporales"
+    FinSegun
+FinFuncion
+
+Funcion MostrarInformacionAdicional(categoria)
+    Escribir ""
+    Escribir "=== INFORMACIÓN ADICIONAL ==="
+    
+    Segun categoria Hacer
+        Caso 1:
+            Escribir "⏰ Tiempo de pantalla recomendado: 1 hora máximo"
+            Escribir "👨‍👩‍👧 Recomendación: Ver acompañado de adultos"
+            Escribir "🍿 Horario sugerido: Mañana o tarde temprano"
+            
+        Caso 2:
+            Escribir "⏰ Tiempo de pantalla recomendado: 1.5-2 horas"
+            Escribir "👨‍👩‍👧 Recomendación: Supervisión parental ocasional"
+            Escribir "🍿 Horario sugerido: Tarde o fin de semana"
+            
+        Caso 3:
+            Escribir "⏰ Sin restricciones específicas de tiempo"
+            Escribir "👨‍👩‍👧 Recomendación: Autonomía con orientación"
+            Escribir "🍿 Horario sugerido: Cualquier momento apropiado"
+            
+        Caso 4:
+            Escribir "⏰ Flexibilidad total de horarios"
+            Escribir "🎬 Géneros variados disponibles"
+            Escribir "🍿 Experiencia cinematográfica completa"
+            
+        Caso 5:
+            Escribir "⏰ Preferencia por horarios tradicionales"
+            Escribir "📺 Disponible en múltiples plataformas"
+            Escribir "🍿 Experiencia nostálgica y de calidad"
+    FinSegun
+FinFuncion
+
+Algoritmo AsistenteVirtualCine
+    Definir edad, categoriaUsuario Como Entero
+    Definir continuar Como Caracter
+    
+    Escribir "=== ASISTENTE VIRTUAL DE CINE ==="
+    Escribir "🎬 Recomendaciones personalizadas según su edad"
+    Escribir ""
+    
+    Repetir
+        Escribir "👤 Ingrese su edad:"
+        Leer edad
+        
+        Si edad >= 0 Y edad <= 120 Entonces
+            categoriaUsuario <- DeterminarCategoriaEdad(edad)
+            MostrarRecomendacionesPorEdad(categoriaUsuario, edad)
+            MostrarInformacionAdicional(categoriaUsuario)
+            
+            // Sugerencias de plataformas
+            Escribir ""
+            Escribir "=== DÓNDE VER ==="
+            Segun categoriaUsuario Hacer
+                Caso 1, 2:
+                    Escribir "📺 Disney+, Netflix Kids, Amazon Prime"
+                Caso 3:
+                    Escribir "📺 Netflix, Amazon Prime, HBO Max"
+                Caso 4, 5:
+                    Escribir "📺 Netflix, HBO Max, Amazon Prime, Hulu"
+                    Escribir "🎭 Cines locales para estrenos"
+            FinSegun
+            
+        SiNo
+            Escribir "❌ Error: Ingrese una edad válida (0-120 años)"
+        FinSi
+        
+        Escribir ""
+        Escribir "¿Desea obtener recomendaciones para otra edad? (S/N):"
+        Leer continuar
+        continuar <- Mayusculas(continuar)
+        Escribir ""
+        
+    Hasta Que continuar = "N"
+    
+    Escribir "¡Disfrute de sus películas! 🎬🍿"
+    
+FinAlgoritmo
