@@ -1,0 +1,86 @@
+// ========== FUNCIONES ==========
+
+// Función para leer temperatura en Celsius
+Funcion celsius <- LeerTemperaturaCelsius()
+    Escribir "Ingrese la temperatura en grados Celsius:"
+    Leer celsius
+FinFuncion
+
+// Función para convertir Celsius a Fahrenheit
+Funcion fahrenheit <- CelsiusAFahrenheit(celsius)
+    fahrenheit <- (celsius * 9/5) + 32
+FinFuncion
+
+// Función para mostrar conversiones y análisis de temperatura
+Funcion MostrarConversiones(celsius, fahrenheit)
+    Definir kelvin Como Real
+    kelvin <- celsius + 273.15
+    
+    Escribir ""
+    Escribir "=== CONVERSIONES DE TEMPERATURA ==="
+    Escribir "------------------------------------"
+    Escribir "Celsius:     ", celsius, "°C"
+    Escribir "Fahrenheit:  ", fahrenheit, "°F"
+    Escribir "Kelvin:      ", kelvin, "K"
+    Escribir "------------------------------------"
+    
+    // Análisis de la temperatura
+    Escribir ""
+    Escribir "=== ANÁLISIS DE TEMPERATURA ==="
+    
+    Si celsius <= 0 Entonces
+        Escribir "🧊 CONGELACIÓN - El agua se congela"
+        Si celsius <= -40 Entonces
+            Escribir "❄️ EXTREMADAMENTE FRÍO - Peligroso para humanos"
+        SiNo
+            Si celsius <= -20 Entonces
+                Escribir "🥶 MUY FRÍO - Usar ropa de abrigo"
+            FinSi
+        FinSi
+    SiNo
+        Si celsius <= 15 Entonces
+            Escribir "🧥 FRÍO - Se recomienda abrigo"
+        SiNo
+            Si celsius <= 25 Entonces
+                Escribir "🌤️ TEMPLADO - Temperatura agradable"
+            SiNo
+                Si celsius <= 35 Entonces
+                    Escribir "☀️ CALOR - Temperatura cálida"
+                SiNo
+                    Si celsius >= 100 Entonces
+                        Escribir "💨 EBULLICIÓN - El agua hierve"
+                    SiNo
+                        Escribir "🔥 MUY CALOR - Buscar sombra y hidratarse"
+                    FinSi
+                FinSi
+            FinSi
+        FinSi
+    FinSi
+    
+    // Información adicional
+    Si celsius = 37 Entonces
+        Escribir "🌡️ Temperatura corporal humana normal"
+    FinSi
+    
+    Si celsius = 20 Entonces
+        Escribir "🏠 Temperatura ambiente ideal"
+    FinSi
+FinFuncion
+
+// ========== PROGRAMA PRINCIPAL ==========
+
+Algoritmo ConversionTemperatura
+    Definir celsius, fahrenheit Como Real
+    
+    Escribir "=== CONVERSOR DE TEMPERATURA CELSIUS A FAHRENHEIT ==="
+    Escribir "Programa para convertir temperatura y proporcionar análisis"
+    Escribir ""
+    
+    celsius <- LeerTemperaturaCelsius()
+    fahrenheit <- CelsiusAFahrenheit(celsius)
+    MostrarConversiones(celsius, fahrenheit)
+    
+    Escribir ""
+    Escribir "¡Gracias por usar el conversor de temperatura!"
+    
+FinAlgoritmo
