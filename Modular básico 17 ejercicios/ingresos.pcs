@@ -1,0 +1,108 @@
+// ========== FUNCIONES ==========
+
+// Función para leer ingresos con validación
+Funcion ingresos <- LeerIngresos(T)
+    Escribir "=== INGRESO DE DATOS FINANCIEROS ==="
+    Escribir "Ingrese el total de ingresos:"
+    Leer ingresos
+    
+    Mientras ingresos < 0 Hacer
+        Escribir "Error: Los ingresos no pueden ser negativos"
+        Escribir "Ingrese el total de ingresos:"
+        Leer ingresos
+    FinMientras
+FinFuncion
+
+// Función para calcular ganancia neta y margen
+Funcion ganancia <- CalcularGananciaNeta(ingresos, gastos, margen Por Referencia)
+    ganancia <- ingresos - gastos
+    
+    Si ingresos > 0 Entonces
+        margen <- (ganancia / ingresos) * 100
+    SiNo
+        margen <- 0
+    FinSi
+FinFuncion
+
+// Función para mostrar análisis financiero completo
+Funcion MostrarAnalisisFinanciero(ingresos, gastos, ganancia, margen)
+    Escribir ""
+    Escribir "=== ANÁLISIS FINANCIERO ==="
+    Escribir "--------------------------------"
+    Escribir "Ingresos totales:    $", ingresos
+    Escribir "Gastos totales:      $", gastos
+    Escribir "--------------------------------"
+    
+    Si ganancia >= 0 Entonces
+        Escribir "GANANCIA NETA:       $", ganancia, " ✅"
+        Escribir "Margen de ganancia:  ", margen, "%"
+        
+        // Análisis del margen
+        Si margen >= 30 Entonces
+            Escribir "🎉 EXCELENTE RENTABILIDAD - Margen superior al 30%"
+        SiNo
+            Si margen >= 20 Entonces
+                Escribir "👍 MUY BUENA RENTABILIDAD - Margen entre 20% y 30%"
+            SiNo
+                Si margen >= 10 Entonces
+                    Escribir "✅ RENTABILIDAD ACEPTABLE - Margen entre 10% y 20%"
+                SiNo
+                    Si margen > 0 Entonces
+                        Escribir "⚠️ RENTABILIDAD BAJA - Margen menor al 10%"
+                        Escribir "Se recomienda optimizar gastos o aumentar ingresos"
+                    SiNo
+                        Escribir "🟰 PUNTO DE EQUILIBRIO - Sin ganancias ni pérdidas"
+                    FinSi
+                FinSi
+            FinSi
+        FinSi
+    SiNo
+        Escribir "PÉRDIDA NETA:        $", ganancia * (-1), " ❌"
+        Escribir "Porcentaje de pérdida: ", margen * (-1), "%"
+        Escribir "📊 SITUACIÓN CRÍTICA - Se requiere revisión urgente de estrategia"
+    FinSi
+    
+    Escribir ""
+    Escribir "=== RECOMENDACIONES ==="
+    Si ganancia < 0 Entonces
+        Escribir "• Reducir gastos operativos"
+        Escribir "• Incrementar estrategias de ventas"
+        Escribir "• Revisar precios de productos/servicios"
+    SiNo
+        Si margen < 15 Entonces
+            Escribir "• Buscar optimización de gastos"
+            Escribir "• Evaluar oportunidades de crecimiento"
+        SiNo
+            Escribir "• Mantener la estrategia actual"
+            Escribir "• Considerar reinversión para crecimiento"
+        FinSi
+    FinSi
+FinFuncion
+
+// ========== PROGRAMA PRINCIPAL ==========
+
+Algoritmo GananciaNeta
+    Definir ingresos, gastos, ganancia, margen Como Real
+    
+    Escribir "=== CALCULADORA DE GANANCIA NETA ==="
+    Escribir "Programa para calcular y analizar la rentabilidad del negocio"
+    Escribir ""
+    
+    ingresos <- LeerIngresos(T)
+    
+    Escribir "Ingrese el total de gastos:"
+    Leer gastos
+    
+    Mientras gastos < 0 Hacer
+        Escribir "Error: Los gastos no pueden ser negativos"
+        Escribir "Ingrese el total de gastos:"
+        Leer gastos
+    FinMientras
+    
+    ganancia <- CalcularGananciaNeta(ingresos, gastos, margen)
+    MostrarAnalisisFinanciero(ingresos, gastos, ganancia, margen)
+    
+    Escribir ""
+    Escribir "¡Gracias por usar el analizador financiero!"
+    
+FinAlgoritmo
